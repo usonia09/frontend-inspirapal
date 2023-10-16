@@ -1,6 +1,10 @@
-import { User } from "./app";
+import { Post, User } from "./app";
+import { CommentDoc } from "./concepts/comment";
+import { ConnectSpaceDoc } from "./concepts/connectSpace";
 import { AlreadyFriendsError, FriendNotFoundError, FriendRequestAlreadyExistsError, FriendRequestDoc, FriendRequestNotFoundError } from "./concepts/friend";
 import { PostAuthorNotMatchError, PostDoc } from "./concepts/post";
+import { ScheduleEventDoc } from "./concepts/scheduleEvent";
+import { UpvoteDoc } from "./concepts/upvote";
 import { Router } from "./framework/router";
 
 /**
@@ -8,6 +12,67 @@ import { Router } from "./framework/router";
  * For example, it converts a {@link PostDoc} into a more readable format for the frontend.
  */
 export default class Responses {
+  /**
+   * Convert ConnectSpaceDoc into more readable format for frontend by converting organizer and
+   * participants into usernames and making messages more readable.
+   */
+  static async connectSpace(connectSpace: ConnectSpaceDoc | null) {
+    if (!connectSpace) {
+      return connectSpace;
+    }
+    const organizer = await User.getUserById(connectSpace.organizer);
+    const participants = await User.idsToUsernames(connectSpace.participants);
+    const messages = await this.posts(await Post.getPostsByIds(connectSpace.messages));
+    return { ...connectSpace, organizer: organizer.username, participants: participants, messages: messages };
+  }
+
+  /**
+   * Convert ScheduleDoc into more readable format for frontend by converting scheduler into username.
+   */
+  static async event(event: ScheduleEventDoc | null) {
+    if (!event) {
+      return event;
+    }
+    const scheduler = await User.getUserById(event.scheduler);
+    return { ...event, scheduler: scheduler.username };
+  }
+
+  /**
+   * Same as {@link event} but for an array of ScheduleEventDoc for improved performance.
+   */
+  static async events(events: ScheduleEventDoc[]) {
+    const schedulers = await User.idsToUsernames(events.map((event) => event.scheduler));
+    return events.map((event, i) => ({ ...event, scheduler: schedulers[i] }));
+  }
+
+  /**
+   * Convert CommentDoc into more readable format for frontend by converting author into username.
+   */
+  static async comment(comment: CommentDoc | null) {
+    if (!comment) {
+      return comment;
+    }
+    const author = await User.getUserById(comment.author);
+    return { ...comment, author: author.username };
+  }
+
+  /**
+   * Same as {@link Comment} but for an array of CommentDoc for improved performance.
+   */
+  static async comments(comments: CommentDoc[]) {
+    const authors = await User.idsToUsernames(comments.map((comment) => comment.author));
+    return comments.map((comment, i) => ({ ...comment, author: authors[i] }));
+  }
+
+  /**
+   * Convert an array of UpvoteDoc to upvoter usernames.
+   */
+  static async upvoters(upvotes: UpvoteDoc[]) {
+    const upvoters = await User.idsToUsernames(upvotes.map((upvote) => upvote.upvoter));
+    const upvote_ids = upvotes.map((upvote) => upvote._id);
+    return upvoters.map((upvoter, i) => ({ upvoter, upvote_id: upvote_ids[i] }));
+  }
+
   /**
    * Convert PostDoc into more readable format for the frontend by converting the author id into a username.
    */

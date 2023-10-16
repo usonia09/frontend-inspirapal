@@ -10,21 +10,50 @@ export interface PostOptions {
 export interface PostDoc extends BaseDoc {
   author: ObjectId;
   content: string;
+  label?: string;
   options?: PostOptions;
 }
 
 export default class PostConcept {
   public readonly posts = new DocCollection<PostDoc>("posts");
 
-  async create(author: ObjectId, content: string, options?: PostOptions) {
-    const _id = await this.posts.createOne({ author, content, options });
-    return { msg: "Post successfully created!", post: await this.posts.readOne({ _id }) };
+  async createPost(author: ObjectId, content: string, label: string, options?: PostOptions) {
+    const _id = await this.posts.createOne({ author, content, label, options });
+    return { msg: "Post successfully created!", id: _id, post: await this.posts.readOne({ _id }) };
+  }
+
+  async createMessage(author: ObjectId, content: string) {
+    const _id = await this.posts.createOne({ author, content });
+    return { msg: "Message successfully created!", id: _id, message: await this.posts.readOne({ _id }) };
   }
 
   async getPosts(query: Filter<PostDoc>) {
     const posts = await this.posts.readMany(query, {
       sort: { dateUpdated: -1 },
     });
+    return posts;
+  }
+
+  async getPostLabel(_id: ObjectId) {
+    const post = await this.posts.readOne({ _id });
+    if (!post) {
+      throw new NotFoundError("Post not Found!");
+    }
+    return post.label;
+  }
+
+  async getPostById(_id: ObjectId) {
+    return await this.posts.readOne({ _id });
+  }
+
+  async getPostsByIds(ids: ObjectId[]) {
+    const posts: PostDoc[] = [];
+    for (const id of ids) {
+      const post = await this.getPostById(id);
+      if (post) {
+        posts.push(post);
+      }
+    }
     return posts;
   }
 
@@ -55,7 +84,7 @@ export default class PostConcept {
 
   private sanitizeUpdate(update: Partial<PostDoc>) {
     // Make sure the update cannot change the author.
-    const allowedUpdates = ["content", "options"];
+    const allowedUpdates = ["content", "label", "options"];
     for (const key in update) {
       if (!allowedUpdates.includes(key)) {
         throw new NotAllowedError(`Cannot update '${key}' field!`);
@@ -69,6 +98,6 @@ export class PostAuthorNotMatchError extends NotAllowedError {
     public readonly author: ObjectId,
     public readonly _id: ObjectId,
   ) {
-    super("{0} is not the author of post {1}!", author, _id);
+    super("{0} is not the author of post/message {1}!", author, _id);
   }
 }
