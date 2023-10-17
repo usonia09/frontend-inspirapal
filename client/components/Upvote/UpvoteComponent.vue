@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
 const props = defineProps(["post"]);
 let upvotes = (await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
-let upvoteCount = upvotes.length;
+let upvoteCount = ref(upvotes.length);
 
 const upvotePost = async () => {
   try {
@@ -12,15 +13,7 @@ const upvotePost = async () => {
   } catch {
     return;
   }
-  await updateCount();
-};
-
-const updateCount = async () => {
-  try {
-    upvoteCount = (await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes.length;
-  } catch {
-    return;
-  }
+  upvoteCount.value++;
 };
 </script>
 
