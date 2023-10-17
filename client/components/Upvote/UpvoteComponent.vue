@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { ObjectId } from "mongodb";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
 import { fetchy } from "../../utils/fetchy";
@@ -13,14 +14,14 @@ const upvotePost = async () => {
     await fetchy(`api/posts/${props.post._id}/upvotes`, "POST");
     upvoteCount.value++;
   } catch {
-    await removeUpvote(currentUsername);
+    await removeUpvote();
     upvoteCount.value--;
   }
 };
 
-async function removeUpvote(currentUsername) {
+async function removeUpvote() {
   let upvotes = (await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
-  let userUpvote = upvotes.filter((upvote) => upvote.upvoter === currentUsername.value)[0];
+  let userUpvote = upvotes.filter((upvote: { upvoter: string; upvote_id: ObjectId }) => upvote.upvoter == currentUsername.value)[0];
   await fetchy(`api/upvotes/${userUpvote.upvote_id}`, "DELETE");
 }
 </script>
