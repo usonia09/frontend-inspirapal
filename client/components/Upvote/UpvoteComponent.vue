@@ -2,9 +2,13 @@
 import { ref } from "vue";
 import { ObjectId } from "mongodb";
 import { storeToRefs } from "pinia";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 import { useUserStore } from "@/stores/user";
 import { fetchy } from "../../utils/fetchy";
 
+library.add(fas);
 const props = defineProps(["post"]);
 let upvoteCount = ref((await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes.length);
 const { currentUsername } = storeToRefs(useUserStore());
@@ -28,18 +32,18 @@ async function removeUpvote() {
 
 <template>
   <div>
-    <!--<font-awesome-icon icon="fa-solid fa-thumbs-up" @click="upvotePost" /> -->
-    <button @click="upvotePost">Upvote</button>
+    <font-awesome-icon icon="thumbs-up" @click="upvotePost" />
     <span>{{ upvoteCount }}</span>
   </div>
 </template>
 
 <style scoped>
 div {
+  font-size: 1em;
   display: flex;
-  align-items: center;
+  padding: 5px;
 }
-button {
-  margin: 5px;
+span {
+  margin-left: 5px;
 }
 </style>
