@@ -5,8 +5,7 @@ import { useUserStore } from "@/stores/user";
 import { fetchy } from "../../utils/fetchy";
 
 const props = defineProps(["post"]);
-let upvotes = (await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
-let upvoteCount = ref(upvotes.length);
+let upvoteCount = ref((await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes.length);
 const { currentUsername } = storeToRefs(useUserStore());
 
 const upvotePost = async () => {
@@ -14,19 +13,13 @@ const upvotePost = async () => {
     await fetchy(`api/posts/${props.post._id}/upvotes`, "POST");
     upvoteCount.value++;
   } catch {
-    //    try {
-    //      await removeUpvote(upvotes, currentUsername);
-    //      upvoteCount.value--;
-    //    } catch {
-    //      return;
-    //    }
-    await removeUpvote(upvotes, currentUsername);
+    await removeUpvote(currentUsername);
     upvoteCount.value--;
-    return;
   }
 };
 
-async function removeUpvote(upvotes, currentUsername) {
+async function removeUpvote(currentUsername) {
+  let upvotes = (await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
   let userUpvote = upvotes.filter((upvote) => upvote.upvoter === currentUsername.value)[0];
   await fetchy(`api/upvotes/${userUpvote.upvote_id}`, "DELETE");
 }
