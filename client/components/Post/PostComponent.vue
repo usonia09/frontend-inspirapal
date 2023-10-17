@@ -2,6 +2,7 @@
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
+import UpvoteComponent from "@/components/Upvote/UpvoteComponent.vue";
 import { formatDate } from "@/utils/formatDate";
 
 const props = defineProps(["post"]);
@@ -26,6 +27,10 @@ const deletePost = async () => {
       <li><button class="btn-small pure-button" @click="emit('editPost', props.post._id)">Edit</button></li>
       <li><button class="button-error btn-small pure-button" @click="deletePost">Delete</button></li>
     </menu>
+    <Suspense>
+      <UpvoteComponent :post="props.post" />
+    </Suspense>
+
     <article class="timestamp">
       <p v-if="props.post.dateCreated !== props.post.dateUpdated">Edited on: {{ formatDate(props.post.dateUpdated) }}</p>
       <p v-else>Created on: {{ formatDate(props.post.dateCreated) }}</p>
