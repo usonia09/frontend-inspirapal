@@ -30,7 +30,6 @@ const deletePost = async () => {
     <Suspense>
       <UpvoteComponent :post="props.post" />
     </Suspense>
-
     <article class="timestamp">
       <p v-if="props.post.dateCreated !== props.post.dateUpdated">Edited on: {{ formatDate(props.post.dateUpdated) }}</p>
       <p v-else>Created on: {{ formatDate(props.post.dateCreated) }}</p>
