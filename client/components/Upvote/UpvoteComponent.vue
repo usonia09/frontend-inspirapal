@@ -38,8 +38,6 @@ async function removeUpvote() {
   let userUpvote = upvotes.filter((upvote: { upvoter: string; upvote_id: ObjectId }) => upvote.upvoter == currentUsername.value)[0];
   await fetchy(`api/upvotes/${userUpvote.upvote_id}`, "DELETE");
 }
-
-function upvoteColor() {}
 </script>
 
 <template>
