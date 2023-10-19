@@ -1,43 +1,41 @@
 <script setup lang="ts">
+import { onBeforeMount, ref } from "vue";
+import CreateCategoryForm from "@/components/Category/CreateCategoryForm.vue";
+import CategoryComponent from "@/components/Category/CategoryComponent.vue";
+import { fetchy } from "../../utils/fetchy";
+
 const loaded = ref(false);
 let categories = ref<Array<Record<string, string>>>([]);
 
-async function getCategories(author?: string) {
-  let query: Record<string, string> = author !== undefined ? { author } : {};
-  let postResults;
+async function getCategories(name?: string) {
+  let query: Record<string, string> = name !== undefined ? { name } : {};
+  let categoryResults;
   try {
-    postResults = await fetchy("api/posts", "GET", { query });
+    categoryResults = await fetchy("api/categories", "GET", { query });
   } catch (_) {
     return;
   }
-  searchAuthor.value = author ? author : "";
-  posts.value = postResults;
+  categories.value = categoryResults;
 }
 
 onBeforeMount(async () => {
-  await getPosts();
+  await getCategories();
   loaded.value = true;
 });
 </script>
 
 <template>
-  <section v-if="isLoggedIn">
-    <h2>Create a post:</h2>
-    <CreatePostForm @refreshPosts="getPosts" />
-  </section>
-  <div class="row">
-    <h2 v-if="!searchAuthor">Posts:</h2>
-    <h2 v-else>Posts by {{ searchAuthor }}:</h2>
-    <SearchPostForm @getPostsByAuthor="getPosts" />
-  </div>
-  <section class="posts" v-if="loaded && posts.length !== 0">
-    <article v-for="post in posts" :key="post._id">
-      <PostComponent v-if="editing !== post._id" :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
-      <EditPostForm v-else :post="post" @refreshPosts="getPosts" @editPost="updateEditing" />
+  <section class="categories" v-if="loaded && categories.length !== 0">
+    <article v-for="category in categories" :key="category._id">
+      <CategoryComponent :category="category" />
     </article>
   </section>
-  <p v-else-if="loaded">No posts found</p>
+  <p v-else-if="loaded">No Category Found</p>
   <p v-else>Loading...</p>
+  <section v-if="isLoggedIn">
+    <h2>Create a category:</h2>
+    <CreateCategoryForm @refreshCategories="getCategories" />
+  </section>
 </template>
 
 <style scoped></style>

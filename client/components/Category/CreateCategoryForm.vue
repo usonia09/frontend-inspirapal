@@ -3,6 +3,8 @@ import { fetchy } from "../../utils/fetchy";
 import { ref } from "vue";
 
 const name = ref("");
+const emit = defineEmits(["refreshCategories"]);
+
 const createCategory = async (name: string) => {
   try {
     await fetchy("api/categories", "POST", {
@@ -11,6 +13,12 @@ const createCategory = async (name: string) => {
   } catch {
     return;
   }
+  emit("refreshCategories");
+  emptyForm();
+};
+
+const emptyForm = () => {
+  content.value = "";
 };
 </script>
 
