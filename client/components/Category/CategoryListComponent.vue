@@ -3,9 +3,12 @@ import { onBeforeMount, ref } from "vue";
 import CreateCategoryForm from "@/components/Category/CreateCategoryForm.vue";
 import CategoryComponent from "@/components/Category/CategoryComponent.vue";
 import { fetchy } from "../../utils/fetchy";
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
 
 const loaded = ref(false);
 let categories = ref<Array<Record<string, string>>>([]);
+const { isLoggedIn } = storeToRefs(useUserStore());
 
 async function getCategories(name?: string) {
   let query: Record<string, string> = name !== undefined ? { name } : {};
@@ -33,7 +36,7 @@ onBeforeMount(async () => {
   <p v-else-if="loaded">No Category Found</p>
   <p v-else>Loading...</p>
   <section v-if="isLoggedIn">
-    <h2>Create a category:</h2>
+    <h2>Can't find a category?</h2>
     <CreateCategoryForm @refreshCategories="getCategories" />
   </section>
 </template>
