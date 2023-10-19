@@ -18,7 +18,7 @@ const createCategory = async (name: string) => {
 };
 
 const emptyForm = () => {
-  content.value = "";
+  name.value = "";
 };
 </script>
 
