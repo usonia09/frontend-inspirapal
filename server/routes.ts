@@ -213,6 +213,18 @@ class Routes {
     return await Category.create(name);
   }
 
+  @Router.get("/categories")
+  async getCategories(name?: string) {
+    let categories;
+    if (name) {
+      categories = await Category.getCategories({ name: name });
+      return Responses.categories(categories);
+    }
+    categories = await Category.getCategories({});
+
+    return Responses.categories(categories);
+  }
+
   @Router.get("/categories/:name")
   async getContent(category_name: string) {
     const items = (await Category.getCategoryByName(category_name)).items;

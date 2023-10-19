@@ -1,4 +1,5 @@
 import { Post, User } from "./app";
+import { CategoryDoc } from "./concepts/category";
 import { CommentDoc } from "./concepts/comment";
 import { ConnectSpaceDoc } from "./concepts/connectSpace";
 import { AlreadyFriendsError, FriendNotFoundError, FriendRequestAlreadyExistsError, FriendRequestDoc, FriendRequestNotFoundError } from "./concepts/friend";
@@ -71,6 +72,19 @@ export default class Responses {
     const upvoters = await User.idsToUsernames(upvotes.map((upvote) => upvote.upvoter));
     const upvote_ids = upvotes.map((upvote) => upvote._id);
     return upvoters.map((upvoter, i) => ({ upvoter, upvote_id: upvote_ids[i] }));
+  }
+
+  /**
+   * Convert an array of CategoryDoc into category names and list of posts.
+   */
+  static async categories(categories: CategoryDoc[]) {
+    const all_category_posts = categories.map((category) => category.items);
+    const category_posts: PostDoc[][] = [];
+    for (const posts_ids of all_category_posts) {
+      const posts = await Post.getPostsByIds(posts_ids);
+      category_posts.push(posts);
+    }
+    return categories.map((category, i) => ({ ...category, items: category_posts[i] }));
   }
 
   /**

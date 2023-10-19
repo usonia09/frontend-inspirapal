@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import { Filter, ObjectId } from "mongodb";
 import DocCollection, { BaseDoc } from "../framework/doc";
 import { BadValuesError, NotAllowedError, NotFoundError } from "./errors";
 
@@ -21,6 +21,13 @@ export default class CategoryConcept {
     this.sanitizeUpdate(update);
     await this.categories.updateOne({ _id }, update);
     return { msg: "Updated category content!", updated_category: await this.categories.readOne({ _id }) };
+  }
+
+  async getCategories(query: Filter<CategoryDoc>) {
+    const categories = await this.categories.readMany(query, {
+      sort: { dateUpdated: -1 },
+    });
+    return categories;
   }
 
   async getCategoryByName(name: string) {

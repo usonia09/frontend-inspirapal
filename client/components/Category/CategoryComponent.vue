@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps(["category"]);
+</script>
 
-<template></template>
+<template>
+  <p class="category">{{ props.category.name }}</p>
+</template>
 
 <style scoped></style>
