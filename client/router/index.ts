@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import { useUserStore } from "@/stores/user";
 import HomeView from "../views/HomeView.vue";
+import InCategoryView from "../views/InCategoryView.vue";
 import LoginView from "../views/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import SettingView from "../views/SettingView.vue";
@@ -20,6 +21,12 @@ const router = createRouter({
       name: "Settings",
       component: SettingView,
       meta: { requiresAuth: true },
+    },
+    {
+      path: "/categories/:category",
+      name: "Categories",
+      component: InCategoryView,
+      props: (route) => ({ category: route.params.category }),
     },
     {
       path: "/login",

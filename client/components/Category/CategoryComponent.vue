@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import PostListComponent from "@/components/Post/PostListComponent.vue";
+import router from "@/router";
 const props = defineProps(["category"]);
+
+function navigateToInCategoryView() {
+  void router.push({ path: `categories/${props.category.name}` });
+}
 </script>
 
 <template>
-  <p class="category">{{ props.category.name }}</p>
-  <PostListComponent :category="props.category" />
+  <button @click="navigateToInCategoryView">{{ props.category.name }}</button>
 </template>
 
 <style scoped></style>
