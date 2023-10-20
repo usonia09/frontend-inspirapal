@@ -25,7 +25,7 @@ async function getPosts(author?: string) {
     return;
   }
   searchAuthor.value = author ? author : "";
-  postResults = postResults.filter((post: { author: string; content: string; label: string }) => post.label === props.category);
+  postResults = postResults.filter((post: { author: string; content: string; label: string }) => post.label === props.category.name);
   posts.value = postResults;
 }
 
@@ -42,7 +42,7 @@ onBeforeMount(async () => {
 <template>
   <section v-if="isLoggedIn">
     <h2>Create a post:</h2>
-    <CreatePostForm :categoryName="props.category" @refreshPosts="getPosts" />
+    <CreatePostForm :categoryName="props.category.name" @refreshPosts="getPosts" />
   </section>
   <div class="row">
     <h2 v-if="!searchAuthor">Posts:</h2>
