@@ -11,6 +11,7 @@ import SearchPostForm from "./SearchPostForm.vue";
 const { isLoggedIn } = storeToRefs(useUserStore());
 
 const loaded = ref(false);
+const props = defineProps(["category"]);
 let posts = ref<Array<Record<string, string>>>([]);
 let editing = ref("");
 let searchAuthor = ref("");
@@ -24,6 +25,7 @@ async function getPosts(author?: string) {
     return;
   }
   searchAuthor.value = author ? author : "";
+  postResults = postResults.filter((post: { author: string; content: string; label: string }) => post.label === props.category.name);
   posts.value = postResults;
 }
 
@@ -40,7 +42,7 @@ onBeforeMount(async () => {
 <template>
   <section v-if="isLoggedIn">
     <h2>Create a post:</h2>
-    <CreatePostForm @refreshPosts="getPosts" />
+    <CreatePostForm :categoryName="props.category.name" @refreshPosts="getPosts" />
   </section>
   <div class="row">
     <h2 v-if="!searchAuthor">Posts:</h2>

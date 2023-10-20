@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from "vue";
-import CreateCategoryForm from "@/components/Category/CreateCategoryForm.vue";
 import CategoryComponent from "@/components/Category/CategoryComponent.vue";
-import { fetchy } from "../../utils/fetchy";
+import CreateCategoryForm from "@/components/Category/CreateCategoryForm.vue";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
+import { onBeforeMount, ref } from "vue";
+import { fetchy } from "../../utils/fetchy";
 
 const loaded = ref(false);
 let categories = ref<Array<Record<string, string>>>([]);
