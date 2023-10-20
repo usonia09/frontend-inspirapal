@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { ObjectId } from "mongodb";
-import { storeToRefs } from "pinia";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { useUserStore } from "@/stores/user";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import { useUserStore } from "@/stores/user";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { ObjectId } from "mongodb";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
 library.add(fas);
 
 const props = defineProps(["post"]);
-let upvotes = (await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
+let upvotes = (await fetchy(`/api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
 let upvoteCount = ref(upvotes.length);
 let upvoters = upvotes.map((upvote: { upvoter: string; upvote_id: ObjectId }) => upvote.upvoter);
 const { currentUsername } = storeToRefs(useUserStore());
@@ -23,7 +23,7 @@ if (upvoters.includes(currentUsername.value)) {
 
 const upvotePost = async () => {
   try {
-    await fetchy(`api/posts/${props.post._id}/upvotes`, "POST");
+    await fetchy(`/api/posts/${props.post._id}/upvotes`, "POST");
     upvoteCount.value++;
     iconColor.value = "#0078e7";
   } catch {
@@ -34,9 +34,9 @@ const upvotePost = async () => {
 };
 
 async function removeUpvote() {
-  let upvotes = (await fetchy(`api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
+  let upvotes = (await fetchy(`/api/posts/${props.post._id}/upvotes`, "GET")).upvotes;
   let userUpvote = upvotes.filter((upvote: { upvoter: string; upvote_id: ObjectId }) => upvote.upvoter == currentUsername.value)[0];
-  await fetchy(`api/upvotes/${userUpvote.upvote_id}`, "DELETE");
+  await fetchy(`/api/upvotes/${userUpvote.upvote_id}`, "DELETE");
 }
 </script>
 

@@ -20,12 +20,12 @@ async function getPosts(author?: string) {
   let query: Record<string, string> = author !== undefined ? { author } : {};
   let postResults;
   try {
-    postResults = await fetchy("api/posts", "GET", { query });
+    postResults = await fetchy("/api/posts", "GET", { query });
   } catch (_) {
     return;
   }
   searchAuthor.value = author ? author : "";
-  postResults = postResults.filter((post: { author: string; content: string; label: string }) => post.label === props.category.name);
+  postResults = postResults.filter((post: { author: string; content: string; label: string }) => post.label === props.category);
   posts.value = postResults;
 }
 
@@ -42,7 +42,7 @@ onBeforeMount(async () => {
 <template>
   <section v-if="isLoggedIn">
     <h2>Create a post:</h2>
-    <CreatePostForm :categoryName="props.category.name" @refreshPosts="getPosts" />
+    <CreatePostForm :categoryName="props.category" @refreshPosts="getPosts" />
   </section>
   <div class="row">
     <h2 v-if="!searchAuthor">Posts:</h2>

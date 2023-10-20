@@ -9,7 +9,7 @@ const emit = defineEmits(["refreshPosts"]);
 
 const createPost = async (content: string, label: string) => {
   try {
-    await fetchy("api/posts", "POST", {
+    await fetchy("/api/posts", "POST", {
       body: { content, label },
     });
   } catch (_) {

@@ -8,10 +8,10 @@ const emit = defineEmits(["refreshComments"]);
 
 const addComment = async (content: string) => {
   try {
-    await fetchy(`api/posts/${props.post._id}/comments`, "POST", {
+    await fetchy(`/api/posts/${props.post._id}/comments`, "POST", {
       body: { content },
     });
-  } catch (_) {
+  } catch (e) {
     return;
   }
   emit("refreshComments");

@@ -4,7 +4,7 @@ const props = defineProps(["category"]);
 </script>
 
 <template>
-  <p class="category">{{ props.category.name }}</p>
+  <p class="category">{{ props.category }}</p>
   <PostListComponent :category="props.category" />
 </template>
 

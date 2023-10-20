@@ -14,7 +14,7 @@ async function getCategories(name?: string) {
   let query: Record<string, string> = name !== undefined ? { name } : {};
   let categoryResults;
   try {
-    categoryResults = await fetchy("api/categories", "GET", { query });
+    categoryResults = await fetchy("/api/categories", "GET", { query });
   } catch (_) {
     return;
   }
