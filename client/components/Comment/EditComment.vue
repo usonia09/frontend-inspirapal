@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatDate } from "@/utils/formatDate";
 import { ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
@@ -12,7 +13,7 @@ const editComment = async (content: string) => {
   } catch (e) {
     return;
   }
-  emit("editCommentt");
+  emit("editComment");
   emit("refreshComments");
 };
 </script>
