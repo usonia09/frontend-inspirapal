@@ -3,8 +3,8 @@ import { useUserStore } from "@/stores/user";
 import { fetchy } from "@/utils/fetchy";
 import { storeToRefs } from "pinia";
 import { onBeforeMount, ref } from "vue";
-import CreateComment from "../Comment/CreateComment.vue";
-import MessageComponent from "./MessageComponent.vue";
+import CreateMessage from "../ConnectSpace/CreateMessage.vue";
+import MessageComponent from "../ConnectSpace/MessageComponent.vue";
 
 const { isLoggedIn } = storeToRefs(useUserStore());
 
@@ -37,7 +37,7 @@ onBeforeMount(async () => {
   <p v-else-if="loaded">No message found</p>
   <p v-else>Loading...</p>
   <section v-if="isLoggedIn">
-    <CreateComment :space="props.space" @refreshMessages="getMessages" />
+    <CreateMessage :space="props.space" @refreshMessages="getMessages" />
   </section>
 </template>
 

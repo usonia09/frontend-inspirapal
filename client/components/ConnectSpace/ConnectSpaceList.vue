@@ -3,7 +3,6 @@ import ConnectSpaceComponent from "@/components/ConnectSpace/ConnectSpaceCompone
 import { fetchy } from "@/utils/fetchy";
 import { onBeforeMount, ref } from "vue";
 
-const props = defineProps(["space"]);
 const loaded = ref(false);
 let spaces = ref<Array<Record<string, string>>>([]);
 
@@ -26,7 +25,7 @@ onBeforeMount(async () => {
 <template>
   <section class="spaces" v-if="loaded && spaces.length !== 0">
     <article v-for="space in spaces" :key="space._id">
-      <ConnectSpaceComponent :space="space" @refreshConnectSpace="getSpaces" />
+      <ConnectSpaceComponent :space="space" />
     </article>
   </section>
   <p v-else-if="loaded">No open discussions!</p>
