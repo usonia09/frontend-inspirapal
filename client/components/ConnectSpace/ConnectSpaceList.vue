@@ -13,7 +13,7 @@ const { isLoggedIn } = storeToRefs(useUserStore());
 async function getSpaces() {
   let connectSpaceResult;
   try {
-    connectSpaceResult = await fetchy("/api/events", "GET", {});
+    connectSpaceResult = await fetchy("/api/connectspaces", "GET", {});
   } catch (_) {
     return;
   }

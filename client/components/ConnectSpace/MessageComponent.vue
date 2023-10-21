@@ -4,13 +4,13 @@ import { formatDate } from "@/utils/formatDate";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
 
-const props = defineProps(["message", "space"]);
+const props = defineProps(["message", "spaceId"]);
 const emit = defineEmits(["refreshMessages"]);
 const { currentUsername } = storeToRefs(useUserStore());
 
 const deleteMessage = async () => {
   try {
-    await fetchy(`/connectspaces/${props.space._id}/messages/${props.message._id}`, "DELETE");
+    await fetchy(`/connectspaces/${props.spaceId}/messages/${props.message._id}`, "DELETE");
   } catch {
     return;
   }

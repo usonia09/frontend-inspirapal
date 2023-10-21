@@ -9,13 +9,13 @@ import MessageComponent from "../ConnectSpace/MessageComponent.vue";
 const { isLoggedIn } = storeToRefs(useUserStore());
 
 const loaded = ref(false);
-const props = defineProps(["space"]);
+const props = defineProps(["spaceId"]);
 let messages = ref<Array<Record<string, string>>>([]);
 
 async function getMessages() {
   let messageResults;
   try {
-    messageResults = await fetchy(`/connectspaces/${props.space._id}/messages`, "GET", {});
+    messageResults = await fetchy(`/connectspaces/${props.spaceId}/messages`, "GET", {});
   } catch (_) {
     return;
   }
@@ -31,13 +31,13 @@ onBeforeMount(async () => {
 <template>
   <section class="messages" v-if="loaded && messages.length !== 0">
     <article v-for="message in messages" :key="message._id">
-      <MessageComponent :message="message" :space="props.space" @refreshMessages="getMessages" />
+      <MessageComponent :message="message" :spaceId="props.spaceId" @refreshMessages="getMessages" />
     </article>
   </section>
   <p v-else-if="loaded">No message found</p>
   <p v-else>Loading...</p>
   <section v-if="isLoggedIn">
-    <CreateMessage :space="props.space" @refreshMessages="getMessages" />
+    <CreateMessage :spaceId="props.spaceId" @refreshMessages="getMessages" />
   </section>
 </template>
 

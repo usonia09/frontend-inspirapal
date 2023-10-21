@@ -308,6 +308,12 @@ class Routes {
     return Responses.connectSpace((await ConnectSpace.deleteMessage(connectspaceId, messageId)).connectSpace);
   }
 
+  @Router.get("/connectspaces")
+  async getConnectSpaces() {
+    const spaces = await ConnectSpace.getConnectSpaces({});
+    return spaces;
+  }
+
   @Router.patch("/connectspaces/:connectspaceId/join")
   async joinEvent(session: WebSessionDoc, connectspaceId: ObjectId) {
     const user = WebSession.getUser(session);

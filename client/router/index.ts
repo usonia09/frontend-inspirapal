@@ -37,10 +37,10 @@ const router = createRouter({
       props: (route) => ({ post: route.params.post }),
     },
     {
-      path: "/community/:space",
+      path: "/community/:spaceId/:spaceName",
       name: "Community",
       component: ConnectSpaceView,
-      props: (route) => ({ space: route.params.space }),
+      props: (route) => ({ spaceId: route.params.spaceId, spaceName: route.params.spaceName }),
     },
     {
       path: "/login",
