@@ -14,7 +14,7 @@ async function getSpaces() {
   } catch (_) {
     return;
   }
-  connectSpaceResult.value = connectSpaceResult;
+  spaces.value = connectSpaceResult;
 }
 
 onBeforeMount(async () => {
