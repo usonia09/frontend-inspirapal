@@ -2,6 +2,7 @@ import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 
 import { useUserStore } from "@/stores/user";
+import CommentView from "../views/CommentView.vue";
 import HomeView from "../views/HomeView.vue";
 import InCategoryView from "../views/InCategoryView.vue";
 import LoginView from "../views/LoginView.vue";
@@ -27,6 +28,12 @@ const router = createRouter({
       name: "Categories",
       component: InCategoryView,
       props: (route) => ({ category: route.params.category }),
+    },
+    {
+      path: "/post/:post/comments",
+      name: "Comments",
+      component: CommentView,
+      props: (route) => ({ post: route.params.post }),
     },
     {
       path: "/login",

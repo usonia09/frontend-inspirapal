@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import UpvoteComponent from "@/components/Upvote/UpvoteComponent.vue";
+import router from "@/router";
 import { useUserStore } from "@/stores/user";
 import { formatDate } from "@/utils/formatDate";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
-import CommentListComponent from "../Comment/CommentListComponent.vue";
 
 const props = defineProps(["post"]);
 const emit = defineEmits(["editPost", "refreshPosts"]);
@@ -18,6 +19,10 @@ const deletePost = async () => {
   }
   emit("refreshPosts");
 };
+
+function navigateToComments() {
+  void router.push({ path: `/post/${props.post._id}/comments` });
+}
 </script>
 
 <template>
@@ -31,7 +36,8 @@ const deletePost = async () => {
     <Suspense>
       <UpvoteComponent :post="props.post" />
     </Suspense>
-    <CommentListComponent :post="props.post" />
+    <!-- <CommentListComponent :post="props.post" /> -->
+    <font-awesome-icon icon="comment" @click="navigateToComments" :style="{ color: iconColor }" />
     <article class="timestamp">
       <p v-if="props.post.dateCreated !== props.post.dateUpdated">Edited on: {{ formatDate(props.post.dateUpdated) }}</p>
       <p v-else>Created on: {{ formatDate(props.post.dateCreated) }}</p>

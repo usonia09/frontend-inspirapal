@@ -4,9 +4,7 @@ import PostComponent from "@/components/Post/PostComponent.vue";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 
-// TODO:somehow get the prop for which post we are checking out comment for
-// use that to filter which postcomponet to show as welll as the commentlist to show
-
+const props = defineProps(["post"]);
 const { currentUsername, isLoggedIn } = storeToRefs(useUserStore());
 </script>
 
@@ -14,9 +12,9 @@ const { currentUsername, isLoggedIn } = storeToRefs(useUserStore());
   <main>
     <h1>Comment Page</h1>
     <section>
-      <PostComponent />
+      <PostComponent :post="props.post" />
     </section>
-    <CommentListComponent />
+    <CommentListComponent :post="props.post" />
   </main>
 </template>
 
