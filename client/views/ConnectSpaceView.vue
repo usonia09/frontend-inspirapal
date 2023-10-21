@@ -5,7 +5,7 @@ const props = defineProps(["space"]);
 </script>
 
 <template>
-  <p>{{ props.space.topics }}</p>
+  <p>{{ props.space.topic }}</p>
   <MessageListComponent :space="props.space" />
 </template>
 

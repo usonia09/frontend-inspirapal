@@ -294,6 +294,12 @@ class Routes {
     return Responses.connectSpace((await ConnectSpace.addMessage(connectspaceId, created.id, user)).connectSpace);
   }
 
+  @Router.get("/connectspaces/:connectspaceId/messages")
+  async getMessages(session: WebSessionDoc, connectspaceId: ObjectId) {
+    const space = await ConnectSpace.getConnectSpaceById(connectspaceId);
+    return (await Responses.connectSpace(space))?.messages;
+  }
+
   @Router.patch("/connectspaces/:connectspaceId/messages/:messageId")
   async deleteMessage(session: WebSessionDoc, connectspaceId: ObjectId, messageId: ObjectId) {
     const user = WebSession.getUser(session);
