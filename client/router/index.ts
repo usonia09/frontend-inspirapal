@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import { useUserStore } from "@/stores/user";
 import CommentView from "../views/CommentView.vue";
+import ConnectSpaceView from "../views/ConnectSpaceView.vue";
 import HomeView from "../views/HomeView.vue";
 import InCategoryView from "../views/InCategoryView.vue";
 import LoginView from "../views/LoginView.vue";
@@ -34,6 +35,12 @@ const router = createRouter({
       name: "Comments",
       component: CommentView,
       props: (route) => ({ post: route.params.post }),
+    },
+    {
+      path: "/community/:space",
+      name: "Community",
+      component: ConnectSpaceView,
+      props: (route) => ({ space: route.params.space }),
     },
     {
       path: "/login",

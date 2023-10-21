@@ -18,8 +18,7 @@ async function getComments() {
   let commentResults;
   try {
     commentResults = await fetchy(`/api/posts/${props.post._id}/comments`, "GET", {});
-  } catch (e) {
-    console.log("getting error:", e);
+  } catch (_) {
     return;
   }
   comments.value = commentResults;
