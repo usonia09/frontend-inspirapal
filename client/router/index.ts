@@ -2,7 +2,6 @@ import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 
 import { useUserStore } from "@/stores/user";
-import CommentView from "../views/CommentView.vue";
 import ConnectSpaceView from "../views/ConnectSpaceView.vue";
 import HomeView from "../views/HomeView.vue";
 import InCategoryView from "../views/InCategoryView.vue";
@@ -31,16 +30,10 @@ const router = createRouter({
       props: (route) => ({ category: route.params.category }),
     },
     {
-      path: "/post/:post/comments",
-      name: "Comments",
-      component: CommentView,
-      props: (route) => ({ post: route.params.post }),
-    },
-    {
-      path: "/community/:spaceId/:spaceName",
+      path: "/community/:spaceId",
       name: "Community",
       component: ConnectSpaceView,
-      props: (route) => ({ spaceId: route.params.spaceId, spaceName: route.params.spaceName }),
+      props: (route) => ({ spaceId: route.params.spaceId }),
     },
     {
       path: "/login",

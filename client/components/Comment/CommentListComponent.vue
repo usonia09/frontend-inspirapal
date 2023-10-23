@@ -41,8 +41,6 @@ onBeforeMount(async () => {
   </section>
   <section class="comments" v-if="loaded && comments.length !== 0">
     <article v-for="comment in comments" :key="comment._id">
-      {{ "comment id: " + comment._id }}
-      {{ "editing val:" + editing }}
       <CommentComponent v-if="editing !== comment._id" :comment="comment" @refreshComments="getComments" @editComment="updateEditing" />
       <EditComment v-else :comment="comment" @refreshComments="getComments" @editComment="updateEditing" />
     </article>
