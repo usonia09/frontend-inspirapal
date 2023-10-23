@@ -10,7 +10,7 @@ const { currentUsername } = storeToRefs(useUserStore());
 
 const deleteMessage = async () => {
   try {
-    await fetchy(`/connectspaces/${props.spaceId}/messages/${props.message._id}`, "DELETE");
+    await fetchy(`/api/connectspaces/${props.spaceId}/messages/${props.message._id}`, "PATCH");
   } catch {
     return;
   }
