@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { fetchy } from "@/utils/fetchy";
-import { onBeforeMount } from "vue";
+import { onBeforeMount, onUnmounted } from "vue";
 import MessageListComponent from "../components/ConnectSpace/MessageListComponent.vue";
 
 const props = defineProps(["spaceId", "spaceName"]);
 
 onBeforeMount(async () => {
   await fetchy(`/api/connectspaces/${props.spaceId}/join`, "PATCH");
+});
+
+onUnmounted(async () => {
+  await fetchy(`/api/connectspaces/${props.spaceId}/leave`, "PATCH");
 });
 </script>
 
