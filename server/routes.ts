@@ -297,7 +297,12 @@ class Routes {
   @Router.get("/connectspaces/:connectspaceId/messages")
   async getMessages(session: WebSessionDoc, connectspaceId: ObjectId) {
     const space = await ConnectSpace.getConnectSpaceById(connectspaceId);
-    return (await Responses.connectSpace(space))?.messages;
+    const spaceResponse = await Responses.connectSpace(space);
+    let messages: PostDoc[] = [];
+    if (spaceResponse) {
+      messages = spaceResponse.messages;
+    }
+    return Responses.posts(messages);
   }
 
   @Router.patch("/connectspaces/:connectspaceId/messages/:messageId")

@@ -23,7 +23,7 @@ export default class Responses {
     }
     const organizer = await User.getUserById(connectSpace.organizer);
     const participants = await User.idsToUsernames(connectSpace.participants);
-    const messages = await this.posts(await Post.getPostsByIds(connectSpace.messages));
+    const messages = await Post.getPostsByIds(connectSpace.messages);
     return { ...connectSpace, organizer: organizer.username, participants: participants, messages: messages };
   }
 

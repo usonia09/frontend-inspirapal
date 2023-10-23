@@ -3,13 +3,13 @@ import { ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
 const content = ref("");
-const props = defineProps(["space"]);
+const props = defineProps(["spaceId"]);
 const emit = defineEmits(["refreshMessages"]);
 
 const createMessage = async (content: string) => {
   try {
-    await fetchy(`/api/connectspaces/${props.space._id}/messages`, "PATCH", {
-      body: { content },
+    await fetchy(`/api/connectspaces/${props.spaceId}/messages`, "PATCH", {
+      body: { message: content },
     });
   } catch (_) {
     return;

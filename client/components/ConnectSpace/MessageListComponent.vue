@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import CreateMessage from "@/components/ConnectSpace/CreateMessage.vue";
+import MessageComponent from "@/components/ConnectSpace/MessageComponent.vue";
 import { useUserStore } from "@/stores/user";
 import { fetchy } from "@/utils/fetchy";
 import { storeToRefs } from "pinia";
 import { onBeforeMount, ref } from "vue";
-import CreateMessage from "../ConnectSpace/CreateMessage.vue";
-import MessageComponent from "../ConnectSpace/MessageComponent.vue";
 
 const { isLoggedIn } = storeToRefs(useUserStore());
 
@@ -13,9 +13,10 @@ const props = defineProps(["spaceId"]);
 let messages = ref<Array<Record<string, string>>>([]);
 
 async function getMessages() {
+  let query: Record<string, string> = {};
   let messageResults;
   try {
-    messageResults = await fetchy(`/connectspaces/${props.spaceId}/messages`, "GET", {});
+    messageResults = await fetchy(`/api/connectspaces/${props.spaceId}/messages`, "GET", { query });
   } catch (_) {
     return;
   }
