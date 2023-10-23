@@ -30,10 +30,10 @@ const router = createRouter({
       props: (route) => ({ category: route.params.category }),
     },
     {
-      path: "/community/:spaceId",
+      path: "/community/:spaceId/:spaceName",
       name: "Community",
       component: ConnectSpaceView,
-      props: (route) => ({ spaceId: route.params.spaceId }),
+      props: (route) => ({ spaceId: route.params.spaceId, spaceName: route.params.spaceName }),
     },
     {
       path: "/login",

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import router from "@/router";
+
 const props = defineProps(["category"]);
 
 function navigateToInCategoryView() {
