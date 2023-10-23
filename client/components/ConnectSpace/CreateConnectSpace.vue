@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
 const topic = ref("");
-const emit = defineEmits(["refreshConnectSpace"]);
+const emit = defineEmits(["refreshConnectSpaces"]);
 
 const createSpace = async (topic: string) => {
   try {
@@ -13,7 +13,7 @@ const createSpace = async (topic: string) => {
   } catch {
     return;
   }
-  emit("refreshConnectSpace");
+  emit("refreshConnectSpaces");
   emptyForm();
 };
 
