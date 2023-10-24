@@ -316,7 +316,7 @@ class Routes {
   @Router.get("/connectspaces")
   async getConnectSpaces() {
     const spaces = await ConnectSpace.getConnectSpaces({});
-    return spaces;
+    return Responses.connectSpaces(spaces);
   }
 
   @Router.patch("/connectspaces/:connectspaceId/join")

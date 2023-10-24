@@ -28,6 +28,16 @@ export default class Responses {
   }
 
   /**
+   *  Same as {@link connectSpace} but for an array of ConnectSpaceDoc for improved performance.
+   */
+  static async connectSpaces(spaces: ConnectSpaceDoc[]) {
+    const organizers = await User.idsToUsernames(spaces.map((space) => space.organizer));
+    const participants = spaces.map(async (space) => await User.idsToUsernames(space.participants));
+    const messages = spaces.map(async (space) => await Post.getPostsByIds(space.messages));
+    return spaces.map((space, i) => ({ ...space, organizer: organizers[i], participants: participants[i], messages: messages[i] }));
+  }
+
+  /**
    * Convert ScheduleDoc into more readable format for frontend by converting scheduler into username.
    */
   static async event(event: ScheduleEventDoc | null) {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from "@/router";
 import { useUserStore } from "@/stores/user";
 import { fetchy } from "@/utils/fetchy";
 import { storeToRefs } from "pinia";
@@ -16,6 +17,7 @@ onBeforeMount(async () => {
 const endDiscussion = async () => {
   try {
     await fetchy(`/api/connectspaces/${props.spaceId}/end`, "DELETE");
+    void router.push({ name: "Home" });
   } catch {
     return;
   }
