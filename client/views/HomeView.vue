@@ -1,70 +1,12 @@
 <script setup lang="ts">
 import CategoryListComponent from "@/components/Category/CategoryListComponent.vue";
-import ConnectSpaceList from "@/components/ConnectSpace/ConnectSpaceList.vue";
-import router from "@/router";
-import { useUserStore } from "@/stores/user";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { storeToRefs } from "pinia";
-
-library.add(fas);
-
-const { currentUsername, isLoggedIn } = storeToRefs(useUserStore());
-
-function navigateToSettings() {
-  void router.push({ name: "Settings" });
-}
-
-function navigateToHome() {
-  void router.push({ name: "Home" });
-}
-
-function navigateToScheduling() {
-  void router.push({ path: `/scheduler` });
-}
-
-function navigateToCalendar() {
-  void router.push({ path: `/calendar` });
-}
+import SidebarComponent from "@/components/Sidebar/SidebarComponent.vue";
 </script>
 
 <template>
   <div class="container">
     <div class="items-bar">
-      <div class="user-info">
-        <font-awesome-icon class="user-icon" icon="circle-user" />
-        <p v-if="isLoggedIn">{{ currentUsername }}</p>
-        <p v-else>Please Login!</p>
-      </div>
-      <div class="icon-series">
-        <div class="navigation-icon" @click="navigateToHome">
-          <font-awesome-icon icon="house" />
-          <p>Home</p>
-        </div>
-        <div class="navigation-icon" @click="navigateToCalendar">
-          <font-awesome-icon icon="calendar" />
-          <p>Event Calendar</p>
-        </div>
-
-        <div class="navigation-icon" @click="navigateToScheduling">
-          <font-awesome-icon icon="calendar-plus" />
-          <p>Schedule Event</p>
-        </div>
-
-        <div class="navigation-icon">
-          <font-awesome-icon icon="comments" />
-          <p>Start a Discussion</p>
-        </div>
-
-        <div class="navigation-icon" @click="navigateToSettings">
-          <font-awesome-icon icon="gear" />
-          <p>Settings</p>
-        </div>
-      </div>
-      <div class="discussions">
-        <ConnectSpaceList />
-      </div>
+      <SidebarComponent />
     </div>
     <div class="category-bar">
       <h2>Choose Category:</h2>
