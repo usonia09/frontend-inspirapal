@@ -4,8 +4,14 @@ const props = defineProps(["category"]);
 </script>
 
 <template>
-  <p class="category">{{ props.category }}</p>
-  <PostListComponent :category="props.category" />
+  <div class="category">
+    <h1>{{ props.category }}</h1>
+    <PostListComponent :category="props.category" />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  text-align: center;
+}
+</style>
