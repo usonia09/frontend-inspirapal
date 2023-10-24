@@ -9,7 +9,17 @@ function navigateToConnectSpaceView() {
 </script>
 
 <template>
-  <button @click="navigateToConnectSpaceView">{{ props.space.topic }}</button>
+  <article @click="navigateToConnectSpaceView">{{ props.space.topic }}</article>
 </template>
 
-<style scoped></style>
+<style scoped>
+article {
+  background-color: var(--base-bg);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1em;
+  margin: 10px;
+}
+</style>
