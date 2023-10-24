@@ -2,11 +2,13 @@ import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 
 import { useUserStore } from "@/stores/user";
+import CalendarView from "../views/CalendarView.vue";
 import ConnectSpaceView from "../views/ConnectSpaceView.vue";
 import HomeView from "../views/HomeView.vue";
 import InCategoryView from "../views/InCategoryView.vue";
 import LoginView from "../views/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import ScheduleEventView from "../views/ScheduleEventView.vue";
 import SettingView from "../views/SettingView.vue";
 
 const router = createRouter({
@@ -29,6 +31,19 @@ const router = createRouter({
       component: InCategoryView,
       props: (route) => ({ category: route.params.category }),
     },
+
+    {
+      path: "/calendar",
+      name: "Calendar",
+      component: CalendarView,
+    },
+
+    {
+      path: "/scheduler",
+      name: "Scheduling",
+      component: ScheduleEventView,
+    },
+
     {
       path: "/community/:spaceId/:spaceName/:spaceOrganizer",
       name: "Community",
