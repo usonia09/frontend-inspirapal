@@ -20,7 +20,7 @@ const cancelEvent = async () => {
 <template>
   <p class="title">{{ props.event.title }}</p>
   <p>Organized by: {{ props.event.scheduler }}</p>
-  <p>{{ props.event.time }}</p>
+  <p>Scheduled on: {{ props.event.time }}</p>
   <div class="base">
     <menu v-if="props.event.scheduler == currentUsername">
       <li><button class="btn-small pure-button" @click="emit('editEvent', props.event._id)">Edit</button></li>
