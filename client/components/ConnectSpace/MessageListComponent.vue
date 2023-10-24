@@ -42,4 +42,25 @@ onBeforeMount(async () => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+article {
+  background-color: var(--base-bg);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  /* height: fit-content; */
+}
+
+.messages {
+  padding: 1em;
+}
+</style>

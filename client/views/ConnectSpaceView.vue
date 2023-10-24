@@ -30,9 +30,18 @@ onUnmounted(async () => {
 </script>
 
 <template>
-  <p>{{ props.spaceName }}</p>
-  <MessageListComponent :spaceId="props.spaceId" />
-  <button v-if="props.spaceOrganizer == currentUsername" @click="endDiscussion">End Discussion</button>
+  <div class="space">
+    <h2>{{ props.spaceName }}</h2>
+    <MessageListComponent :spaceId="props.spaceId" />
+    <button v-if="props.spaceOrganizer == currentUsername" @click="endDiscussion">End Discussion</button>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.space {
+  margin: 0 auto;
+}
+h2 {
+  text-align: center;
+}
+</style>
