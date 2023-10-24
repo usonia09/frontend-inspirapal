@@ -42,5 +42,8 @@ form {
   flex-direction: column;
   gap: 0.5em;
   padding: 1em;
+  width: 60vw;
+  margin: auto;
+  margin-top: 30px;
 }
 </style>

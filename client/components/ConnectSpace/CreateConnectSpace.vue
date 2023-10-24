@@ -29,4 +29,10 @@ const emptyForm = () => {
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+form {
+  display: flex;
+  padding: 1em;
+  gap: 0.5em;
+}
+</style>

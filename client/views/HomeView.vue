@@ -93,7 +93,7 @@ function navigateToCalendar() {
 }
 .user-info svg {
   margin-bottom: 10px;
-  font-size: 100px;
+  font-size: 8em;
 }
 .navigation-icon {
   display: flex;

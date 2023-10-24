@@ -41,4 +41,9 @@ onBeforeMount(async () => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+h2 {
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+</style>

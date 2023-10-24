@@ -11,6 +11,9 @@ const props = defineProps(["category"]);
 </template>
 
 <style scoped>
+.category {
+  margin: 2em;
+}
 h1 {
   text-align: center;
 }
