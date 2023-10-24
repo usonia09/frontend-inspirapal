@@ -4,7 +4,7 @@ import router from "@/router";
 const props = defineProps(["space"]);
 
 function navigateToConnectSpaceView() {
-  void router.push({ path: `/community/${props.space._id}/${props.space.topic}` });
+  void router.push({ path: `/community/${props.space._id}/${props.space.topic}/${props.space.organizer}` });
 }
 </script>
 
