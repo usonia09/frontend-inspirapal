@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import EditEventComponent from "@/components/ScheduleEvent/EditEventComponent.vue";
+import EventComponent from "@/components/ScheduleEvent/EventComponent.vue";
 import { fetchy } from "@/utils/fetchy";
 import { onBeforeMount, ref } from "vue";
 
@@ -10,7 +12,7 @@ async function getEvents(scheduler?: string) {
   let query: Record<string, string> = scheduler !== undefined ? { scheduler } : {};
   let eventResults;
   try {
-    eventResults = await fetchy("/api/posts", "GET", { query });
+    eventResults = await fetchy("/api/events", "GET", { query });
   } catch (_) {
     return;
   }
