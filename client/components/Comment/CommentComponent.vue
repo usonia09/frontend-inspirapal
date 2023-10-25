@@ -43,4 +43,8 @@ menu {
   flex-direction: row;
   gap: 1em;
 }
+button {
+  padding: 5px;
+  border-radius: 5px;
+}
 </style>

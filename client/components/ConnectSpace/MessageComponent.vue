@@ -62,4 +62,9 @@ menu {
   gap: 1em;
   margin-top: 10px;
 }
+
+button {
+  padding: 5px;
+  border-radius: 5px;
+}
 </style>
