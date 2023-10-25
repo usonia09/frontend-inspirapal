@@ -16,16 +16,15 @@ function navigateToInCategoryView() {
 
 <style scoped>
 button {
-  width: 1400px;
+  width: 1200px;
   height: 120px;
   background-color: var(--base-bg);
   border-radius: 1em;
   display: flex;
   border-color: transparent;
   flex-direction: column;
-  gap: 0.5em;
   padding: 1em;
-  margin: 10px;
+  margin: 20px;
   justify-content: center;
   text-transform: capitalize;
 }

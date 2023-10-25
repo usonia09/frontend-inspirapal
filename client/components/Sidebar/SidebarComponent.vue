@@ -78,7 +78,7 @@ function navigateToCalendar() {
   padding: 20px;
   height: 100%;
   font-size: 18px;
-  width: 350px;
+  width: 400px;
   position: fixed;
 }
 .logo {

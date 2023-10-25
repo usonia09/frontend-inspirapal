@@ -27,7 +27,7 @@ import SidebarComponent from "@/components/Sidebar/SidebarComponent.vue";
 }
 .category-bar {
   position: absolute;
-  margin-left: 360px;
+  margin-left: 400px;
 }
 .category-bar h2 {
   padding: 20px;
