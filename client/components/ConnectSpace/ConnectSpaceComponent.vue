@@ -43,23 +43,4 @@ button {
 button:hover {
   background-color: rgb(5, 74, 144);
 }
-/* 
-
-button {
-  display: flex;
-  margin-top: 10px;
-  border-color: transparent;
-  background-color: transparent;
-  cursor: pointer;
-  width: 100%;
-  padding: 5px;
-  border-radius: 5px;
-}
-button svg {
-  margin-right: 10px;
-}
-
-button:hover {
-  background-color: var(--base-bg);
-} */
 </style>

@@ -29,8 +29,17 @@ const endDiscussion = async () => {
   emit("refreshConnectSpaces");
 };
 
+const leave = async () => {
+  try {
+    await fetchy(`/api/connectspaces/${props.spaceId}/leave`, "PATCH");
+    void router.push({ name: "Home" });
+  } catch (_) {
+    return;
+  }
+};
+
 onUnmounted(async () => {
-  await fetchy(`/api/connectspaces/${props.spaceId}/leave`, "PATCH");
+  await leave();
 });
 </script>
 
@@ -51,7 +60,7 @@ onUnmounted(async () => {
         <MessageListComponent :spaceId="props.spaceId" />
       </div>
       <div class="action-items">
-        <button id="leave"><font-awesome-icon icon="right-from-bracket" /> Leave</button>
+        <button id="leave" @click="leave"><font-awesome-icon icon="right-from-bracket" /> Leave</button>
         <button id="end" v-if="props.spaceOrganizer == currentUsername" @click="endDiscussion">End Discussion</button>
       </div>
     </div>
