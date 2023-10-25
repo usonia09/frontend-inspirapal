@@ -26,37 +26,6 @@ import SidebarComponent from "@/components/Sidebar/SidebarComponent.vue";
   display: flex;
 }
 
-.user-info {
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  align-items: center;
-  margin-bottom: 30px;
-}
-.user-info svg {
-  margin-bottom: 10px;
-  font-size: 8em;
-}
-.navigation-icon {
-  display: flex;
-  margin-top: 10px;
-  font-size: 18px;
-  align-items: center;
-}
-.navigation-icon :hover {
-  cursor: pointer;
-  color: rgb(30, 103, 207);
-}
-.navigation-icon svg {
-  font-size: 30px;
-  margin-right: 10px;
-}
-
-.items-bar {
-  padding: 20px;
-  height: 100%;
-}
-
 .category-bar h2 {
   padding: 20px;
 }

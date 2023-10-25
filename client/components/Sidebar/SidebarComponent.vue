@@ -30,6 +30,10 @@ function navigateToCalendar() {
 
 <template>
   <div class="items-bar">
+    <div class="logo">
+      <img src="@/assets/images/logo.svg" />
+      <h1>InspiraPal</h1>
+    </div>
     <div class="user-info">
       <font-awesome-icon class="user-icon" icon="circle-user" />
       <p v-if="isLoggedIn">{{ currentUsername }}</p>
@@ -67,22 +71,30 @@ function navigateToCalendar() {
 </template>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ribeye+Marrow&family=The+Nautigal&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
-.container {
+.logo {
   display: flex;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Ribeye Marrow", serif;
+  font-family: "The Nautigal", cursive;
+  font-size: 30px;
+  justify-content: center;
 }
-
+.logo h1 {
+  padding-left: 10px;
+}
 .user-info {
   display: flex;
   flex-direction: column;
   font-size: 18px;
   align-items: center;
-  margin-bottom: 30px;
+  margin: 20px;
 }
 .user-info svg {
   margin-bottom: 10px;
@@ -106,9 +118,5 @@ function navigateToCalendar() {
 .items-bar {
   padding: 20px;
   height: 100%;
-}
-
-.category-bar h2 {
-  padding: 20px;
 }
 </style>
