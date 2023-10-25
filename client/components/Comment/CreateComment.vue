@@ -30,4 +30,13 @@ const emptyForm = () => {
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+form {
+  background-color: var(--base-bg);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1em;
+}
+</style>
