@@ -42,7 +42,7 @@ onBeforeMount(async () => {
 
 <style scoped>
 .spaces {
-  height: 250px;
+  height: 160px;
   overflow-y: auto;
 }
 </style>

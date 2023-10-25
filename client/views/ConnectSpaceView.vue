@@ -6,17 +6,19 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
-import { onBeforeMount, onUnmounted } from "vue";
+import { onBeforeMount, onUnmounted, ref } from "vue";
 import MessageListComponent from "../components/ConnectSpace/MessageListComponent.vue";
 
 library.add(fas);
 
 const props = defineProps(["spaceId", "spaceName", "spaceOrganizer"]);
+const participantCount = ref(0);
 const emit = defineEmits(["refreshConnectSpaces"]);
 const { currentUsername } = storeToRefs(useUserStore());
 
 onBeforeMount(async () => {
   await fetchy(`/api/connectspaces/${props.spaceId}/join`, "PATCH");
+  await getParticipantCount();
 });
 
 const endDiscussion = async () => {
@@ -27,6 +29,16 @@ const endDiscussion = async () => {
     return;
   }
   emit("refreshConnectSpaces");
+};
+
+const getParticipantCount = async () => {
+  let participants;
+  try {
+    participants = await fetchy(`/api/connectspaces/${props.spaceId}/participants`, "GET");
+  } catch (_) {
+    return;
+  }
+  participantCount.value = participants.length;
 };
 
 const leave = async () => {
@@ -52,7 +64,7 @@ onUnmounted(async () => {
       </div>
       <div class="participants">
         <font-awesome-icon icon="people-group" />
-        <p>124</p>
+        <p>{{ participantCount }}</p>
       </div>
     </div>
     <div class="engage">

@@ -84,7 +84,6 @@ function navigateToCalendar() {
 .logo {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 .logo h1 {
   font-family: "Open Sans", sans-serif;
@@ -101,7 +100,7 @@ function navigateToCalendar() {
   font-size: 20px;
 }
 .user-info svg {
-  font-size: 6em;
+  font-size: 5em;
   padding-bottom: 5px;
 }
 .icon-series {
