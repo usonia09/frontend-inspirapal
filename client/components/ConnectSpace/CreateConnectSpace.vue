@@ -24,8 +24,8 @@ const emptyForm = () => {
 
 <template>
   <form @submit.prevent="createSpace(topic)">
-    <textarea id="space-topic" v-model="topic" placeholder="Add a topic..." required> </textarea>
-    <button type="submit" class="pure-button-primary pure-button">Start Discussion</button>
+    <textarea id="space-topic" v-model="topic" placeholder="Add a topic..." maxlength="27" required> </textarea>
+    <button type="submit" class="pure-button-primary pure-button">Start A New Discussion</button>
   </form>
 </template>
 

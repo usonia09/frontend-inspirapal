@@ -24,7 +24,7 @@ const emptyForm = () => {
 
 <template>
   <form @submit.prevent="createCategory(name)">
-    <textarea id="category-name" v-model="name" placeholder="Add a New Category!" required> </textarea>
+    <textarea id="category-name" v-model="name" placeholder="Add a New Category!" maxlength="20" required> </textarea>
     <button type="submit" class="pure-button-primary pure-button">Create Category</button>
   </form>
 </template>
@@ -33,12 +33,17 @@ const emptyForm = () => {
 form {
   display: flex;
   gap: 1em;
-  align-items: center;
   padding: 1em;
 }
 
 textarea {
   padding-right: 10em;
   text-align: center;
+}
+
+button,
+textarea {
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 </style>

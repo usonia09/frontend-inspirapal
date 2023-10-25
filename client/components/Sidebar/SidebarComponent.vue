@@ -74,14 +74,13 @@ function navigateToCalendar() {
   box-sizing: border-box;
 }
 .items-bar {
-  border: 1px solid black;
   padding: 20px;
-  height: 100vh;
+  height: 100%;
   font-size: 18px;
-  max-width: 20em;
+  width: 350px;
+  position: fixed;
 }
 .logo {
-  border: 1px solid blue;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -94,7 +93,6 @@ function navigateToCalendar() {
   margin-left: 10px;
 }
 .user-info {
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,7 +104,6 @@ function navigateToCalendar() {
   padding-bottom: 5px;
 }
 .icon-series {
-  border: 1px solid red;
   margin: 10px;
 }
 button {
@@ -129,7 +126,6 @@ button:hover {
 }
 
 .discussions {
-  border: 1px solid violet;
   margin: 10px;
 }
 </style>
