@@ -5,7 +5,7 @@ import { useUserStore } from "@/stores/user";
 import { formatDate } from "@/utils/formatDate";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
 const props = defineProps(["post"]);
@@ -36,6 +36,10 @@ const getCommentCount = async () => {
   }
   commentCount.value = comments.length;
 };
+
+onBeforeMount(async () => {
+  await getCommentCount();
+});
 </script>
 
 <template>
