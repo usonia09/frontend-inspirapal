@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
-import { formatDate } from "@/utils/formatDate";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
 
@@ -26,11 +25,22 @@ const deleteComment = async () => {
       <li><button class="btn-small pure-button" @click="emit('editComment', props.comment._id)">Edit</button></li>
       <li><button class="button-error btn-small pure-button" @click="deleteComment">Delete</button></li>
     </menu>
-    <article class="timestamp">
-      <p v-if="props.comment.dateCreated !== props.comment.dateUpdated">Edited on: {{ formatDate(props.comment.dateUpdated) }}</p>
-      <p v-else>Created on: {{ formatDate(props.comment.dateCreated) }}</p>
-    </article>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+.author {
+  font-weight: bold;
+}
+menu {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+</style>

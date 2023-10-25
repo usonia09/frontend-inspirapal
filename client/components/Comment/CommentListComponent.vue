@@ -49,4 +49,13 @@ onBeforeMount(async () => {
   <p v-else>Loading...</p>
 </template>
 
-<style scoped></style>
+<style scoped>
+article {
+  background-color: var(--base-bg);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 0.5em;
+}
+</style>
