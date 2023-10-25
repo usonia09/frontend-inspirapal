@@ -40,29 +40,24 @@ function navigateToCalendar() {
       <p v-else>Please Login!</p>
     </div>
     <div class="icon-series">
-      <div class="navigation-icon" @click="navigateToHome">
+      <button class="navigation-icon" @click="navigateToHome">
         <font-awesome-icon icon="house" />
-        <p>Home</p>
-      </div>
-      <div class="navigation-icon" @click="navigateToCalendar">
+        Home
+      </button>
+      <button class="navigation-icon" @click="navigateToCalendar">
         <font-awesome-icon icon="calendar" />
-        <p>Event Calendar</p>
-      </div>
+        Event Calendar
+      </button>
 
-      <div class="navigation-icon" @click="navigateToScheduling">
+      <button class="navigation-icon" @click="navigateToScheduling">
         <font-awesome-icon icon="calendar-plus" />
-        <p>Schedule Event</p>
-      </div>
+        Schedule Event
+      </button>
 
-      <div class="navigation-icon">
-        <font-awesome-icon icon="comments" />
-        <p>Start a Discussion</p>
-      </div>
-
-      <div class="navigation-icon" @click="navigateToSettings">
+      <button class="navigation-icon" @click="navigateToSettings">
         <font-awesome-icon icon="gear" />
-        <p>Settings</p>
-      </div>
+        Settings
+      </button>
     </div>
     <div class="discussions">
       <ConnectSpaceList />
@@ -78,45 +73,63 @@ function navigateToCalendar() {
   margin: 0;
   box-sizing: border-box;
 }
+.items-bar {
+  border: 1px solid black;
+  padding: 20px;
+  height: 100vh;
+  font-size: 18px;
+  max-width: 20em;
+}
 .logo {
+  border: 1px solid blue;
   display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.logo h1 {
   font-family: "Open Sans", sans-serif;
   font-family: "Ribeye Marrow", serif;
   font-family: "The Nautigal", cursive;
-  font-size: 30px;
-  justify-content: center;
-}
-.logo h1 {
-  padding-left: 10px;
+  font-size: 50px;
+  margin-left: 10px;
 }
 .user-info {
+  border: 1px solid green;
   display: flex;
   flex-direction: column;
-  font-size: 18px;
   align-items: center;
-  margin: 20px;
+  margin: 10px;
+  font-size: 20px;
 }
 .user-info svg {
-  margin-bottom: 10px;
-  font-size: 8em;
+  font-size: 6em;
+  padding-bottom: 5px;
 }
-.navigation-icon {
+.icon-series {
+  border: 1px solid red;
+  margin: 10px;
+}
+button {
   display: flex;
   margin-top: 10px;
-  font-size: 18px;
-  align-items: center;
-}
-.navigation-icon :hover {
+  border-color: transparent;
+  background-color: transparent;
   cursor: pointer;
-  color: rgb(30, 103, 207);
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
 }
 .navigation-icon svg {
-  font-size: 30px;
   margin-right: 10px;
+  width: 20px;
 }
 
-.items-bar {
-  padding: 20px;
-  height: 100%;
+button:hover {
+  background-color: var(--base-bg);
+}
+
+.discussions {
+  border: 1px solid violet;
+  margin: 10px;
 }
 </style>

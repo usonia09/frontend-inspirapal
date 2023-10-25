@@ -32,7 +32,12 @@ const emptyForm = () => {
 <style scoped>
 form {
   display: flex;
-  padding: 1em;
-  gap: 0.5em;
+  flex-direction: column;
+  margin-top: 20px;
+}
+textarea,
+button {
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 </style>

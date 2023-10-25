@@ -27,17 +27,17 @@ onBeforeMount(async () => {
 </script>
 
 <template>
+  <h2>Ongoing Discussions:</h2>
   <section class="spaces" v-if="loaded && spaces.length !== 0">
-    <h2>Ongoing Discussions:</h2>
     <article v-for="space in spaces" :key="space._id">
       <ConnectSpaceComponent :space="space" />
     </article>
   </section>
+  <p v-else-if="loaded">No open discussions!</p>
+  <p v-else>Loading...</p>
   <section v-if="isLoggedIn">
     <CreateConnectSpace @refreshConnectSpaces="getSpaces" />
   </section>
-  <p v-else-if="loaded">No open discussions!</p>
-  <p v-else>Loading...</p>
 </template>
 
 <style scoped></style>
