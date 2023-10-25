@@ -16,5 +16,6 @@ const props = defineProps(["category"]);
 }
 h1 {
   text-align: center;
+  text-transform: capitalize;
 }
 </style>
