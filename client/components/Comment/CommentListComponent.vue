@@ -13,6 +13,7 @@ const props = defineProps(["post"]);
 const loaded = ref(false);
 let comments = ref<Array<Record<string, string>>>([]);
 let editing = ref("");
+const emit = defineEmits(["refreshCommentsCount"]);
 
 async function getComments() {
   let commentResults;
@@ -22,6 +23,7 @@ async function getComments() {
     return;
   }
   comments.value = commentResults;
+  emit("refreshCommentsCount");
 }
 
 function updateEditing(id: string) {

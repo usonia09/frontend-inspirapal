@@ -10,6 +10,7 @@ import { fetchy } from "../../utils/fetchy";
 
 const props = defineProps(["post"]);
 const commentsShowing = ref(false);
+const commentCount = ref(0);
 const emit = defineEmits(["editPost", "refreshPosts"]);
 const { currentUsername } = storeToRefs(useUserStore());
 
@@ -25,6 +26,16 @@ const deletePost = async () => {
 function showCommentsToggle() {
   commentsShowing.value = !commentsShowing.value;
 }
+
+const getCommentCount = async () => {
+  let comments;
+  try {
+    comments = await fetchy(`/api/posts/${props.post._id}/comments`, "GET");
+  } catch {
+    return;
+  }
+  commentCount.value = comments.length;
+};
 </script>
 
 <template>
@@ -38,13 +49,14 @@ function showCommentsToggle() {
     <Suspense>
       <UpvoteComponent :post="props.post" />
     </Suspense>
-    <font-awesome-icon icon="comment" @click="showCommentsToggle" />
+    <span><font-awesome-icon icon="comment" @click="showCommentsToggle" /> {{ commentCount }}</span>
+
     <article class="timestamp">
       <p v-if="props.post.dateCreated !== props.post.dateUpdated">Edited on: {{ formatDate(props.post.dateUpdated) }}</p>
       <p v-else>Created on: {{ formatDate(props.post.dateCreated) }}</p>
     </article>
   </div>
-  <CommentListComponent v-if="commentsShowing" :post="props.post" />
+  <CommentListComponent v-if="commentsShowing" :post="props.post" @refreshCommentsCount="getCommentCount" />
 </template>
 
 <style scoped>
