@@ -43,24 +43,30 @@ onBeforeMount(async () => {
 </template>
 
 <style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
 section {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  max-width: 40em;
   margin: 0 auto;
 }
 
 article {
-  background-color: var(--base-bg);
-  border-radius: 1em;
   display: flex;
   flex-direction: column;
-  padding: 1em;
-  /* height: fit-content; */
+  padding: 10px;
+  margin-left: 50px;
 }
 
 .messages {
-  padding: 1em;
+  height: 660px;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 </style>

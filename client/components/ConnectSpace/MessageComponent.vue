@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
-import { formatDate } from "@/utils/formatDate";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
 
+library.add(fas);
+
 const props = defineProps(["message", "spaceId"]);
-const emit = defineEmits(["refreshMessages"]);
+const emit = defineEmits(["refreshMessages", "editMessage"]);
 const { currentUsername } = storeToRefs(useUserStore());
 
 const deleteMessage = async () => {
@@ -19,38 +23,30 @@ const deleteMessage = async () => {
 </script>
 
 <template>
-  <p class="author">{{ props.message.author }}</p>
-  <p>{{ props.message.content }}</p>
+  <p class="author"><font-awesome-icon class="user-icon" icon="circle-user" /> {{ props.message.author }}</p>
+  <p class="content">{{ props.message.content }}</p>
   <div class="base">
     <menu v-if="props.message.author == currentUsername">
+      <li><button class="btn-small pure-button" @click="emit('editMessage', props.message._id)">Edit</button></li>
       <li><button class="button-error btn-small pure-button" @click="deleteMessage">Delete</button></li>
     </menu>
-    <article class="timestamp">
-      <p>Created on: {{ formatDate(props.message.dateCreated) }}</p>
-    </article>
   </div>
 </template>
 
 <style scoped>
-.author {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-menu {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
+* {
   padding: 0;
   margin: 0;
+  box-sizing: 0;
 }
 
-.timestamp {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 0.9em;
-  font-style: italic;
+.author {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.content,
+.base {
+  margin-left: 20px;
 }
 
 .base {
@@ -59,7 +55,11 @@ menu {
   align-items: center;
 }
 
-.base article:only-child {
-  margin-left: auto;
+menu {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  margin-top: 10px;
 }
 </style>

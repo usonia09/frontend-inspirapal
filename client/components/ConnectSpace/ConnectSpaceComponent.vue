@@ -36,11 +36,3 @@ button:hover {
   background-color: var(--base-bg);
 }
 </style>
-
-<!-- background-color: var(--base-bg);
-border-radius: 1em;
-display: flex;
-flex-direction: column;
-gap: 0.5em;
-padding: 1em;
-margin: 10px; -->
