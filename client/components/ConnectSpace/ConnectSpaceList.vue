@@ -40,4 +40,9 @@ onBeforeMount(async () => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.spaces {
+  height: 250px;
+  overflow-y: auto;
+}
+</style>

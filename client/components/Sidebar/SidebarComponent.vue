@@ -59,6 +59,7 @@ function navigateToCalendar() {
         Settings
       </button>
     </div>
+
     <div class="discussions">
       <ConnectSpaceList />
     </div>
