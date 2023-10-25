@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { formatDate } from "@/utils/formatDate";
 import { ref } from "vue";
 import { fetchy } from "../../utils/fetchy";
 
@@ -27,10 +26,27 @@ const editComment = async (content: string) => {
         <li><button class="btn-small pure-button-primary pure-button" type="submit">Save</button></li>
         <li><button class="btn-small pure-button" @click="emit('editComment')">Cancel</button></li>
       </menu>
-      <p v-if="props.comment.dateCreated !== props.comment.dateUpdated" class="timestamp">Edited on: {{ formatDate(props.comment.dateUpdated) }}</p>
-      <p v-else class="timestamp">Created on: {{ formatDate(props.comment.dateCreated) }}</p>
     </div>
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+.author {
+  font-weight: bold;
+}
+
+form {
+  background-color: var(--base-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+menu {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  padding: 0;
+  margin: 0;
+}
+</style>
