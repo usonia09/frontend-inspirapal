@@ -27,5 +27,6 @@ button {
   margin: 20px;
   justify-content: center;
   text-transform: capitalize;
+  cursor: pointer;
 }
 </style>

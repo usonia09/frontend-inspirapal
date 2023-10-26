@@ -34,10 +34,10 @@ function navigateToCalendar() {
       <img src="@/assets/images/logo.svg" />
       <h1>InspiraPal</h1>
     </div>
-    <div class="user-info">
+    <div class="user-info" @click="navigateToSettings">
       <font-awesome-icon class="user-icon" icon="circle-user" />
-      <button class="login-button" v-if="isLoggedIn">{{ currentUsername }}</button>
-      <button class="login-button" v-else @click="navigateToSettings">Please Login!</button>
+      <p class="login-logout" v-if="isLoggedIn">{{ currentUsername }}</p>
+      <p class="login-logout" v-else>Please Login!</p>
     </div>
     <div class="icon-series">
       <button class="navigation-icon" @click="navigateToHome">
@@ -74,6 +74,7 @@ function navigateToCalendar() {
   margin: 0;
   box-sizing: border-box;
 }
+
 .items-bar {
   padding: 20px;
   height: 100%;
@@ -98,6 +99,11 @@ function navigateToCalendar() {
   align-items: center;
   margin: 10px;
   font-size: 20px;
+  cursor: pointer;
+}
+.user-info:hover {
+  font-weight: bold;
+  text-decoration: underline;
 }
 .user-info svg {
   font-size: 5em;

@@ -68,6 +68,10 @@ p {
   margin: 0em;
 }
 
+span {
+  cursor: pointer;
+}
+
 .author {
   font-weight: bold;
   font-size: 1.2em;

@@ -52,6 +52,7 @@ div {
   font-size: 1em;
   display: flex;
   padding: 5px;
+  cursor: pointer;
 }
 span {
   margin-left: 5px;
