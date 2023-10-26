@@ -36,8 +36,8 @@ function navigateToCalendar() {
     </div>
     <div class="user-info">
       <font-awesome-icon class="user-icon" icon="circle-user" />
-      <p v-if="isLoggedIn">{{ currentUsername }}</p>
-      <p v-else>Please Login!</p>
+      <button class="login-button" v-if="isLoggedIn">{{ currentUsername }}</button>
+      <button class="login-button" v-else @click="navigateToSettings">Please Login!</button>
     </div>
     <div class="icon-series">
       <button class="navigation-icon" @click="navigateToHome">
@@ -46,12 +46,12 @@ function navigateToCalendar() {
       </button>
       <button class="navigation-icon" @click="navigateToCalendar">
         <font-awesome-icon icon="calendar" />
-        Event Calendar
+        Discussion Calendar
       </button>
 
       <button class="navigation-icon" @click="navigateToScheduling">
         <font-awesome-icon icon="calendar-plus" />
-        Schedule Event
+        Schedule Discussion
       </button>
 
       <button class="navigation-icon" @click="navigateToSettings">

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import router from "@/router";
+import { useUserStore } from "@/stores/user";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { storeToRefs } from "pinia";
 
 library.add(fas);
 
+const { isLoggedIn } = storeToRefs(useUserStore());
 const props = defineProps(["space"]);
 
 function navigateToConnectSpaceView() {
@@ -16,7 +19,7 @@ function navigateToConnectSpaceView() {
 <template>
   <div class="space-item">
     <span><font-awesome-icon icon="comments" />{{ props.space.topic }}</span>
-    <button @click="navigateToConnectSpaceView">Join</button>
+    <button @click="navigateToConnectSpaceView" v-if="isLoggedIn">Join</button>
   </div>
 </template>
 
