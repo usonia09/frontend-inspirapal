@@ -2,8 +2,9 @@ import { ObjectId } from "mongodb";
 
 import { Router, getExpressRouter } from "./framework/router";
 
-import { Category, Comment, ConnectSpace, Friend, Post, ScheduleEvent, Upvote, User, WebSession } from "./app";
+import { Category, Comment, ConnectSpace, Friend, Message, Post, ScheduleEvent, Upvote, User, WebSession } from "./app";
 import { CommentDoc } from "./concepts/comment";
+import { MessageDoc } from "./concepts/message";
 import { PostDoc, PostOptions } from "./concepts/post";
 import { ScheduleEventDoc } from "./concepts/scheduleEvent";
 import { UserDoc } from "./concepts/user";
@@ -290,7 +291,7 @@ class Routes {
   @Router.patch("/connectspaces/:connectspaceId/messages")
   async sendMessage(session: WebSessionDoc, connectspaceId: ObjectId, message: string) {
     const user = WebSession.getUser(session);
-    const created = await Post.createMessage(user, message);
+    const created = await Message.createMessage(user, message);
     return Responses.connectSpace((await ConnectSpace.addMessage(connectspaceId, created.id, user)).connectSpace);
   }
 
@@ -298,18 +299,18 @@ class Routes {
   async getMessages(session: WebSessionDoc, connectspaceId: ObjectId) {
     const space = await ConnectSpace.getConnectSpaceById(connectspaceId);
     const spaceResponse = await Responses.connectSpace(space);
-    let messages: PostDoc[] = [];
+    let messages: MessageDoc[] = [];
     if (spaceResponse) {
       messages = spaceResponse.messages;
     }
-    return Responses.posts(messages);
+    return Responses.messages(messages);
   }
 
   @Router.patch("/connectspaces/:connectspaceId/messages/:messageId")
   async deleteMessage(session: WebSessionDoc, connectspaceId: ObjectId, messageId: ObjectId) {
     const user = WebSession.getUser(session);
-    await Post.isAuthor(user, messageId);
-    await Post.delete(messageId);
+    await Message.isAuthor(user, messageId);
+    await Message.delete(messageId);
     return Responses.connectSpace((await ConnectSpace.deleteMessage(connectspaceId, messageId)).connectSpace);
   }
 

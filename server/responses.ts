@@ -1,8 +1,9 @@
-import { Post, User } from "./app";
+import { Message, Post, User } from "./app";
 import { CategoryDoc } from "./concepts/category";
 import { CommentDoc } from "./concepts/comment";
 import { ConnectSpaceDoc } from "./concepts/connectSpace";
 import { AlreadyFriendsError, FriendNotFoundError, FriendRequestAlreadyExistsError, FriendRequestDoc, FriendRequestNotFoundError } from "./concepts/friend";
+import { MessageDoc } from "./concepts/message";
 import { PostAuthorNotMatchError, PostDoc } from "./concepts/post";
 import { ScheduleEventDoc } from "./concepts/scheduleEvent";
 import { UpvoteDoc } from "./concepts/upvote";
@@ -23,7 +24,7 @@ export default class Responses {
     }
     const organizer = await User.getUserById(connectSpace.organizer);
     const participants = await User.idsToUsernames(connectSpace.participants);
-    const messages = await Post.getPostsByIds(connectSpace.messages);
+    const messages = await Message.getMessagesByIds(connectSpace.messages);
     return { ...connectSpace, organizer: organizer.username, participants: participants, messages: messages };
   }
 
@@ -33,7 +34,7 @@ export default class Responses {
   static async connectSpaces(spaces: ConnectSpaceDoc[]) {
     const organizers = await User.idsToUsernames(spaces.map((space) => space.organizer));
     const participants = spaces.map(async (space) => await User.idsToUsernames(space.participants));
-    const messages = spaces.map(async (space) => await Post.getPostsByIds(space.messages));
+    const messages = spaces.map(async (space) => await Message.getMessagesByIds(space.messages));
     return spaces.map((space, i) => ({ ...space, organizer: organizers[i], participants: participants[i], messages: messages[i] }));
   }
 
@@ -95,6 +96,25 @@ export default class Responses {
       category_posts.push(posts);
     }
     return categories.map((category, i) => ({ ...category, items: category_posts[i] }));
+  }
+
+  /**
+   * Convert MessageDoc into more readable format for the frontend by converting the author id into a username.
+   */
+  static async message(message: MessageDoc | null) {
+    if (!message) {
+      return message;
+    }
+    const author = await User.getUserById(message.author);
+    return { ...message, author: author.username };
+  }
+
+  /**
+   * Same as {@link message} but for an array of MessageDoc for improved performance.
+   */
+  static async messages(messages: MessageDoc[]) {
+    const authors = await User.idsToUsernames(messages.map((message) => message.author));
+    return messages.map((message, i) => ({ ...message, author: authors[i] }));
   }
 
   /**
