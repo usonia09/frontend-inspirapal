@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
+
+library.add(fas);
 
 const props = defineProps(["comment"]);
 const emit = defineEmits(["editComment", "refreshComments"]);
@@ -22,8 +27,8 @@ const deleteComment = async () => {
   <p>{{ props.comment.content }}</p>
   <div class="base">
     <menu v-if="props.comment.author == currentUsername">
-      <li><button class="btn-small pure-button" @click="emit('editComment', props.comment._id)">Edit</button></li>
-      <li><button class="button-error btn-small pure-button" @click="deleteComment">Delete</button></li>
+      <li><font-awesome-icon class="pencil" icon="pencil" @click="emit('editComment', props.comment._id)" /></li>
+      <li><font-awesome-icon id="trash" icon="trash" @click="deleteComment" /></li>
     </menu>
   </div>
 </template>
@@ -39,6 +44,7 @@ const deleteComment = async () => {
 }
 menu {
   list-style-type: none;
+  align-items: center;
   display: flex;
   flex-direction: row;
   gap: 1em;
@@ -46,5 +52,9 @@ menu {
 button {
   padding: 5px;
   border-radius: 5px;
+}
+
+svg:hover {
+  cursor: pointer;
 }
 </style>

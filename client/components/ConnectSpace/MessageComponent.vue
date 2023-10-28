@@ -27,8 +27,9 @@ const deleteMessage = async () => {
   <p class="content">{{ props.message.content }}</p>
   <div class="base">
     <menu v-if="props.message.author == currentUsername">
-      <li><button class="btn-small pure-button" @click="emit('editMessage', props.message._id)">Edit</button></li>
-      <li><button class="button-error btn-small pure-button" @click="deleteMessage">Delete</button></li>
+      <li>
+        <font-awesome-icon class="trash" icon="trash" @click="deleteMessage" />
+      </li>
     </menu>
   </div>
 </template>
@@ -63,8 +64,8 @@ menu {
   margin-top: 10px;
 }
 
-button {
-  padding: 5px;
-  border-radius: 5px;
+svg:hover {
+  color: var(--red);
+  cursor: pointer;
 }
 </style>

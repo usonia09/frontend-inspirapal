@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores/user";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { storeToRefs } from "pinia";
 import { fetchy } from "../../utils/fetchy";
 
@@ -23,8 +24,8 @@ const cancelEvent = async () => {
   <p>Scheduled on: {{ props.event.time }}</p>
   <div class="base">
     <menu v-if="props.event.scheduler == currentUsername">
-      <li><button class="btn-small pure-button" @click="emit('editEvent', props.event._id)">Edit</button></li>
-      <li><button class="button-error btn-small pure-button" @click="cancelEvent">Cancel</button></li>
+      <li><font-awesome-icon class="pencil" icon="pencil" @click="emit('editEvent', props.event._id)" /></li>
+      <li><font-awesome-icon class="cancel" icon="xmark" @click="cancelEvent" style="color: red; font-size: 24px" /></li>
     </menu>
   </div>
 </template>
@@ -43,6 +44,7 @@ menu {
   list-style-type: none;
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 1em;
   padding: 0;
   margin: 0;
@@ -50,5 +52,9 @@ menu {
 
 .base article:only-child {
   margin-left: auto;
+}
+
+svg:hover {
+  cursor: pointer;
 }
 </style>

@@ -47,8 +47,8 @@ onBeforeMount(async () => {
   <p>{{ props.post.content }}</p>
   <div class="base">
     <menu v-if="props.post.author == currentUsername">
-      <li><button class="btn-small pure-button" @click="emit('editPost', props.post._id)">Edit</button></li>
-      <li><button class="button-error btn-small pure-button" @click="deletePost">Delete</button></li>
+      <li><font-awesome-icon class="pencil" icon="pencil" @click="emit('editPost', props.post._id)" /></li>
+      <li><font-awesome-icon class="trash" icon="trash" @click="deletePost" /></li>
     </menu>
     <Suspense>
       <UpvoteComponent :post="props.post" />
@@ -81,6 +81,7 @@ menu {
   list-style-type: none;
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 1em;
   padding: 0;
   margin: 0;
@@ -101,5 +102,9 @@ menu {
 
 .base article:only-child {
   margin-left: auto;
+}
+
+svg:hover {
+  cursor: pointer;
 }
 </style>
