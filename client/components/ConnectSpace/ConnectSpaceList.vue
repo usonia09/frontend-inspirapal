@@ -27,7 +27,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <h2>Ongoing Discussions:</h2>
+  <h2>Ongoing Discussions ({{ spaces.length }}):</h2>
   <section class="spaces" v-if="loaded && spaces.length !== 0">
     <article v-for="space in spaces" :key="space._id">
       <ConnectSpaceComponent :space="space" />
