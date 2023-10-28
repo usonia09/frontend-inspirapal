@@ -74,7 +74,7 @@ p,
 }
 
 article {
-  background-color: #96e2e6;
+  background-color: var(--base-5);
   border-radius: 1em;
   display: flex;
   flex-direction: column;
