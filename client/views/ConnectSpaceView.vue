@@ -85,11 +85,7 @@ onUnmounted(async () => {
   margin: 0;
   box-sizing: border-box;
 }
-.space {
-  height: 95vh;
-  margin: 2em;
-  position: relative;
-}
+
 .space-description {
   display: flex;
   justify-content: space-between;
@@ -102,6 +98,7 @@ onUnmounted(async () => {
 }
 .name svg {
   font-size: 40px;
+  margin-left: 15px;
   margin-right: 15px;
 }
 .participants {
@@ -116,8 +113,6 @@ onUnmounted(async () => {
 }
 .engage {
   display: flex;
-  height: 88vh;
-  padding: 20px;
   position: relative;
 }
 .message-area {
@@ -142,6 +137,6 @@ button:hover {
 #end {
   color: white;
   font-weight: bold;
-  background-color: rgb(212, 13, 13);
+  background-color: var(--red);
 }
 </style>
