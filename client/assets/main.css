@@ -1,8 +1,14 @@
 /* Add some global styles here! */
 
 :root {
-  --red: rgb(208, 67, 12);
+  --red: rgb(216, 64, 4);
   --base-bg: #f1f3f5;
+  --base-dp: #d3d8de;
+  --base-5: #b3e4e6;
+  --base-4: #0483fa;
+  --base-3: #1b9afa;
+  --base-2: #14f4b4;
+  --base-1: #9f98fa;
 }
 
 button.btn-small {

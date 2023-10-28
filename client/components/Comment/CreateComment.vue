@@ -39,4 +39,10 @@ form {
   gap: 0.5em;
   padding: 1em;
 }
+button {
+  background-color: var(--base-3);
+}
+button:hover {
+  background-color: var(--base-4);
+}
 </style>

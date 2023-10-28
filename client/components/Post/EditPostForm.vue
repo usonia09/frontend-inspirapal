@@ -40,6 +40,8 @@ form {
   background-color: var(--base-bg);
   display: flex;
   flex-direction: column;
+  padding: 1em;
+  border-radius: 1em;
   gap: 0.5em;
 }
 
@@ -49,10 +51,6 @@ textarea {
   height: 6em;
   border-radius: 4px;
   resize: none;
-}
-
-p {
-  margin: 0em;
 }
 
 .author {

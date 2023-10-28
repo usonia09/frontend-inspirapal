@@ -36,7 +36,7 @@ span svg {
 button {
   margin-right: 10px;
   border-color: transparent;
-  background-color: rgb(28, 99, 170);
+  background-color: var(--base-3);
   cursor: pointer;
   padding: 5px;
   border-radius: 5px;
@@ -44,6 +44,6 @@ button {
 }
 
 button:hover {
-  background-color: rgb(5, 74, 144);
+  background-color: var(--base-4);
 }
 </style>

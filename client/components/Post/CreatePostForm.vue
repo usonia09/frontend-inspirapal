@@ -49,7 +49,7 @@ p {
   font-weight: bold;
 }
 form {
-  background-color: rgb(143, 139, 139);
+  background-color: var(--base-dp);
   border-radius: 1em;
   display: flex;
   flex-direction: column;
@@ -64,5 +64,12 @@ textarea {
   padding: 0.5em;
   border-radius: 4px;
   resize: none;
+}
+
+button {
+  background-color: var(--base-3);
+}
+button:hover {
+  background-color: var(--base-4);
 }
 </style>

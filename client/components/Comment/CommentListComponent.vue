@@ -59,5 +59,6 @@ article {
   flex-direction: column;
   padding: 1em;
   gap: 0.5em;
+  margin-bottom: 10px;
 }
 </style>

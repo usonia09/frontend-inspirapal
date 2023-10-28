@@ -22,4 +22,11 @@ form {
   padding: 1em;
   align-items: center;
 }
+
+button {
+  background-color: var(--base-3);
+}
+button:hover {
+  background-color: var(--base-4);
+}
 </style>

@@ -40,4 +40,11 @@ button {
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
+button {
+  background-color: var(--base-3);
+}
+button:hover {
+  background-color: var(--base-4);
+}
 </style>
