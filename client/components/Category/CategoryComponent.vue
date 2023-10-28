@@ -18,7 +18,7 @@ function navigateToInCategoryView() {
 button {
   width: 1200px;
   height: 120px;
-  background-color: var(--base-1);
+  background-color: var(--base-5);
   border-radius: 1em;
   display: flex;
   border-color: transparent;
@@ -30,6 +30,6 @@ button {
   cursor: pointer;
 }
 button:hover {
-  background-color: #7a72e8;
+  background-color: #79aeb0;
 }
 </style>
